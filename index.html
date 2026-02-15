@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+	<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عون | تطبيق صحي ذكي</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #eef6ff;
+}
+
+header {
+    background-color: #0077cc;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    background-color: #005fa3;
+    text-align: center;
+    padding: 10px;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+section {
+    padding: 30px;
+    text-align: center;
+}
+
+input, select, textarea {
+    width: 80%;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+button {
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+.hidden {
+    display: none;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1> عون</h1>
+    <p>بياناتك الطبية في متناول الطوارئ</p>
+</header>
+
+<nav>
+    <a onclick="showHome()">الرئيسية</a>
+    <a onclick="showLogin()">تسجيل الدخول</a>
+</nav>
+
+<section id="home">
+    <h2>مرحبًا بك في عون</h2>
+    <p>سجل بياناتك الطبية لتكون جاهزة في حالات الطوارئ.</p>
+</section>
+
+<section id="login" class="hidden">
+    <h2>تسجيل الدخول</h2>
+    <input type="text" id="username" placeholder="اسم المستخدم">
+    <input type="password" id="password" placeholder="كلمة المرور">
+    <br>
+    <button onclick="login()">دخول</button>
+</section>
+
+<section id="formSection" class="hidden">
+    <h2>البيانات الطبية</h2>
+
+    <input type="text" id="emergency" placeholder="رقم الطوارئ">
+
+    <select id="gender">
+        <option value="">اختر الجنس</option>
+        <option>ذكر</option>
+        <option>أنثى</option>
+    </select>
+
+    <select id="blood">
+        <option value="">اختر فصيلة الدم</option>
+        <option>A+</option>
+        <option>A-</option>
+        <option>B+</option>
+        <option>B-</option>
+        <option>O+</option>
+        <option>O-</option>
+        <option>AB+</option>
+        <option>AB-</option>
+    </select>
+
+    <select id="diseases">
+        <option value="">اختر مرض مزمن</option>
+        <option>السكري</option>
+        <option>الضغط</option>
+        <option>الربو</option>
+        <option>أمراض القلب</option>
+        <option>لا يوجد</option>
+    </select>
+
+    <select id="allergy">
+        <option value="">اختر نوع الحساسية</option>
+        <option>أدوية</option>
+        <option>أطعمة</option>
+        <option>غبار</option>
+        <option>لا يوجد</option>
+    </select>
+
+    <textarea id="meds" placeholder="الأدوية المستخدمة"></textarea>
+
+    <br>
+    <label>
+        <input type="checkbox" id="agree">
+        أوافق على مشاركة البيانات في حالات الطوارئ
+    </label>
+
+    <br><br>
+    <button onclick="saveData()">حفظ البيانات</button>
+
+    <div id="result" class="card hidden"></div>
+</section>
+
+<script>
+function showHome(){
+    document.getElementById("home").classList.remove("hidden");
+    document.getElementById("login").classList.add("hidden");
+    document.getElementById("formSection").classList.add("hidden");
+}
+
+function showLogin(){
+    document.getElementById("home").classList.add("hidden");
+    document.getElementById("login").classList.remove("hidden");
+    document.getElementById("formSection").classList.add("hidden");
+}
+
+function login(){
+    var user = document.getElementById("username").value;
+    var pass = document.getElementById("password").value;
+
+    if(user !== "" && pass !== ""){
+        document.getElementById("login").classList.add("hidden");
+        document.getElementById("formSection").classList.remove("hidden");
+    } else {
+        alert("الرجاء إدخال اسم المستخدم وكلمة المرور");
+    }
+}
+
+function saveData(){
+    if(!document.getElementById("agree").checked){
+        alert("يجب الموافقة على الشروط أولاً");
+        return;
+    }
+
+    var result = document.getElementById("result");
+    result.innerHTML = `
+        <h3> بطاقة الطوارئ</h3>
+        <p><strong>رقم الطوارئ:</strong> ${emergency.value}</p>
+        <p><strong>الجنس:</strong> ${gender.value}</p>
+        <p><strong>فصيلة الدم:</strong> ${blood.value}</p>
+        <p><strong>المرض المزمن:</strong> ${diseases.value}</p>
+        <p><strong>الحساسية:</strong> ${allergy.value}</p>
+        <p><strong>الأدوية:</strong> ${meds.value}</p>
+    `;
+    result.classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
+	
+</body>
+</html>
